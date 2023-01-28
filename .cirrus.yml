@@ -31,14 +31,9 @@ task:
       - echo "============================"
       - echo "Syncing The Sources..."
       - echo "============================"
-      - apt-get install sudo 
-
-
       - curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
       - chmod a+x ~/bin/repo
-
-
-      - PATH="$HOME/bin:$PATH"' >> ~/.bashrc
+      - echo 'export PATH="$HOME/bin:$PATH"' >> ~/.bashrc
       - source ~/.bashrc
 
       - mkdir -p ~/pixel
