@@ -35,7 +35,12 @@ task:
       - mkdir -p ~/pixel
       - cd ~/pixel
       - git clone https://github.com/ponces/treble_build_pe -b thirteen 
-      - sudo apt-get install repo -y
+      - cd ~
+      - mkdir ~/bin
+      - PATH=~/bin:$PATH
+      - curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
+      - chmod a+x ~/bin/repo 
+      - PATH=~/bin:$PATH
 
       - cd ~
       
