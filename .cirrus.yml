@@ -31,17 +31,20 @@ task:
       - echo "============================"
       - echo "Syncing The Sources..."
       - echo "============================"
-      - apt-get install sudo
+      - apt-get install sudo 
+
+
+      - curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
+      - chmod a+x ~/bin/repo
+
+
+      - PATH="$HOME/bin:$PATH"' >> ~/.bashrc
+      - source ~/.bashrc
+
       - mkdir -p ~/pixel
       - cd ~/pixel
       - git clone https://github.com/ponces/treble_build_pe -b thirteen 
-      - cd ~
-      - mkdir ~/bin
-      - PATH=~/bin:$PATH
-      - curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
-      - chmod a+x ~/bin/repo 
-      - PATH=~/bin:$PATH
-      - source ~/.bashrc
+      
 
       - cd ~
       
