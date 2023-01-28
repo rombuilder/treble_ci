@@ -31,8 +31,12 @@ task:
       - echo "============================"
       - echo "Syncing The Sources..."
       - echo "============================"
+      - sudo apt-get update
+      - sudo apt-get install curl -y
+      - mkdir -p ~/bin
       - curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
       - chmod a+x ~/bin/repo
+
       - echo 'export PATH="$HOME/bin:$PATH"' >> ~/.bashrc
       - source ~/.bashrc
 
