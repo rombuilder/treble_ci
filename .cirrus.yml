@@ -5,9 +5,17 @@ task:
       image: ubuntu:20.04
       cpu: 8
       memory: 32G
+        
+  Build-Env-Setup_script:
+      - mkdir -p ~/pixel
+      - cd ~/pixel
+      - git clone https://github.com/ponces/treble_build_pe -b thirteen 
+      - cd ~/pixel 
 
-build_script:
-  - mkdir pixel; cd pixel
-  - git clone https://github.com/ponces/treble_build_pe -b thirteen
-  - bash treble_build_pe/build.sh thirteen
+      - export USE_CCACHE=1
 
+      - export CCACHE_EXEC=/usr/bin/ccache
+
+      - ccache -M 50G
+
+      - . treble_build_pe/build.sh
