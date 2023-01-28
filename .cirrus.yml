@@ -42,7 +42,7 @@ task:
 
       - mkdir -p ~/pixel
       - cd ~/pixel
-      - git clone https://github.com/ponces/treble_build_pe -b thirteen 
+      - git clone https://github.com/rombuilder/treble_build_pe -b thirteen 
       
 
       - cd ~
