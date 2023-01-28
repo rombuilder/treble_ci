@@ -1,1 +1,7 @@
+image: ubuntu:latest
+
+build_script:
+  - mkdir pixel; cd pixel
+  - git clone https://github.com/ponces/treble_build_pe -b thirteen
+  - bash treble_build_pe/build.sh thirteen
 
