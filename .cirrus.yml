@@ -33,7 +33,8 @@ task:
       - echo "============================"
       - mkdir -p ~/pixel
       - cd ~/pixel
-      - git clone https://github.com/ponces/treble_build_pe -b thirteen
+      - git clone https://github.com/ponces/treble_build_pe -b thirteen 
+      - cd ~
       - echo "============================"
       - echo "Syncing Complete!"
       - echo "============================"
@@ -42,7 +43,7 @@ task:
       - echo "============================"
       - echo "Starting the Build..."
       - echo "============================"
-      - cd ~/work
+      - cd ~/pixel
       - $EXTRA_CMD
       - export USE_CCACHE=1
       - export CCACHE_EXEC=/usr/bin/ccache
