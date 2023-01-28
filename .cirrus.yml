@@ -31,13 +31,11 @@ task:
       - echo "============================"
       - echo "Syncing The Sources..."
       - echo "============================"
+      - apt-get install sudo
       - mkdir -p ~/pixel
       - cd ~/pixel
       - git clone https://github.com/ponces/treble_build_pe -b thirteen 
-      - curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
-      - chmod a+x ~/bin/repo
-      - export PATH="$PATH:$HOME/bin"
-      - source ~/.bashrc
+      - sudo apt-get install repo -y
 
       - cd ~
       
