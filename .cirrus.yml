@@ -34,7 +34,13 @@ task:
       - mkdir -p ~/pixel
       - cd ~/pixel
       - git clone https://github.com/ponces/treble_build_pe -b thirteen 
+      - curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
+      - chmod a+x ~/bin/repo
+      - export PATH="$PATH:$HOME/bin"
+      - source ~/.bashrc
+
       - cd ~
+      
       - echo "============================"
       - echo "Syncing Complete!"
       - echo "============================"
