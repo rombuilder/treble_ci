@@ -30,6 +30,7 @@ task:
       - echo "============================"
       - echo "Syncing The Sources..."
       - echo "============================"
+      - sudo apt-get install x11-xkb-utils
       - setxkbmap us 
       - echo "setxkbmap us" >> ~/.bashrc
       - sudo apt-get install locales
