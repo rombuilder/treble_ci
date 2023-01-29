@@ -32,8 +32,8 @@ task:
       - echo "Syncing The Sources..."
       - echo "============================"
       - sudo apt-get update
-      - sudo apt-get install default-jdk
-      - y 
+      - sudo apt-get install default-jdk -y
+      
       - export JAVA_HOME=/usr/lib/jvm/java-1.11.0-openjdk-amd64
 
       - echo $JAVA_HOME
