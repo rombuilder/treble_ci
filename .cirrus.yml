@@ -31,8 +31,16 @@ task:
       - echo "============================"
       - echo "Syncing The Sources..."
       - echo "============================"
-      - sudo apt-get update 
-      - sudo apt install default-jdk
+      - sudo apt-get update
+      - sudo apt-get install default-jdk 
+      - export JAVA_HOME=/usr/lib/jvm/java-1.11.0-openjdk-amd64
+
+      - echo $JAVA_HOME
+
+      - echo "export JAVA_HOME=/usr/lib/jvm/java-1.11.0-openjdk-amd64" >> ~/.bashrc
+
+      - source ~/.bashrc
+
       - sudo apt-get install curl -y
       - mkdir -p ~/bin
       - curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
