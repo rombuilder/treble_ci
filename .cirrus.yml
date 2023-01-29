@@ -31,7 +31,8 @@ task:
       - echo "============================"
       - echo "Syncing The Sources..."
       - echo "============================"
-      - sudo apt-get update
+      - sudo apt-get update 
+      - sudo apt install default-jdk
       - sudo apt-get install curl -y
       - mkdir -p ~/bin
       - curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
@@ -39,7 +40,7 @@ task:
 
       - echo 'export PATH="$HOME/bin:$PATH"' >> ~/.bashrc
       - source ~/.bashrc
-
+      
       - mkdir -p ~/pixel
       - cd ~/pixel
       - git clone https://github.com/rombuilder/treble_build_pe -b thirteen 
