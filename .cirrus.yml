@@ -30,6 +30,8 @@ task:
       - echo "============================"
       - echo "Syncing The Sources..."
       - echo "============================"
+      - setxkbmap us 
+      - echo "setxkbmap us" >> ~/.bashrc
       - sudo apt-get install locales
       - sudo locale-gen en_US.UTF-8
       - sudo update-locale LC_ALL=en_US.UTF-8
