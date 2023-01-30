@@ -3,7 +3,7 @@ task:
   timeout_in: 800m  
   container:
       image: ubuntu:20.04
-      cpu: 9
+      cpu: 8
       memory: 60G
         
   Build-Env-Setup_script:
