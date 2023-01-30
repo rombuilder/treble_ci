@@ -30,12 +30,9 @@ task:
       - echo "============================"
       - echo "Syncing The Sources..."
       - echo "============================"
-      
-     
       - sudo apt-get install locales
       - sudo locale-gen en_US.UTF-8
       - sudo update-locale LC_ALL=en_US.UTF-8
-
       - sudo apt-get install bc -y
       - sudo apt-get install bison -y
       - sudo apt-get install build-essential -y
@@ -57,7 +54,6 @@ task:
       - sudo apt-get install squashfs-tools -y
       - sudo apt-get install xsltproc -y
       - sudo apt-get install zip -y
-    
       - sudo apt-get install python -y
       - sudo apt-get install xmlstarlet -y
       - sudo apt-get install virtualenv -y
@@ -75,26 +71,20 @@ task:
       - echo $JAVA_HOME
       - echo "export JAVA_HOME=/usr/lib/jvm/java-1.11.0-openjdk-amd64" >> ~/.bashrc
       - source ~/.bashrc
-
       - sudo apt-get install curl -y
       - mkdir -p ~/bin
       - curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
       - chmod a+x ~/bin/repo
-
       - echo 'export PATH="$HOME/bin:$PATH"' >> ~/.bashrc
       - source ~/.bashrc
-      
       - mkdir -p ~/pixel
       - cd ~/pixel
       - git clone https://github.com/rombuilder/treble_build_pe -b thirteen 
-      
-
       - cd ~
-      
       - echo "============================"
       - echo "Syncing Complete!"
       - echo "============================"
-
+  
   Build_script:
       - echo "============================"
       - echo "Starting the Build..."
@@ -106,4 +96,6 @@ task:
       - ccache -M 50G
       - . treble_build_pe/build.sh thirteen
       
+
      
+vdgjgxhgdcbb
