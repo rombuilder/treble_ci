@@ -1,10 +1,12 @@
 task:
   name: "Setting Up, Syncing, Building and Uploading..."
   timeout_in: 800m  
-  container:
-      image: ubuntu:20.04
-      cpu: 8
-      memory: 32G
+  persistent_worker:
+  isolation:
+    container:
+      image: debian:latest
+      cpu: 24
+      memory: 128G
         
   Build-Env-Setup_script:
        - export DEBIAN_FRONTEND=noninteractive
