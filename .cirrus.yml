@@ -1,0 +1,9 @@
+task:
+  name: "Setting Up, Syncing, Building and Uploading..."
+  timeout_in: 240m  
+  persistent_worker:
+  isolation:
+    container:
+      image: ubuntu:20.04
+      cpu: 24
+      memory: 128G
