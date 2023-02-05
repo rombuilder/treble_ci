@@ -8,8 +8,8 @@ platform: linux
 task:
   name: "Build Task"
   timeout_in: 240m  
-  container:
-      image: ubuntu:20.04
+  container: linux 
+      image: ubantu
       cpu: 16
       memory: 32G
         
