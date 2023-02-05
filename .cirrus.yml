@@ -3,16 +3,18 @@
 # Choose Ubuntu Linux platform
 platform: linux
 
-# Choose Ubuntu image
-image: ubuntu
 
-# Allocate 16 CPUs
-cpu: 16
 
-# Define your build tasks
-tasks:
-  - name: Install sudo
-    command: |
-      apt-get update
-      apt-get install sudo -y
+task:
+  name: "Build Task"
+  timeout_in: 240m  
+  container:
+      image: ubuntu:20.04
+      cpu: 16
+      memory: 32G
+        
+  script:
+       - echo "Running build with 16 CPUs"
+       - # Add your build commands here
+
 
