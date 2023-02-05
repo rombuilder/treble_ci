@@ -6,9 +6,10 @@ platform: linux
 
 
 task:
+  platform: linux
   name: "Build Task"
   timeout_in: 240m  
-  container: linux 
+  container:
       image: ubantu
       cpu: 16
       memory: 32G
