@@ -1,13 +1,18 @@
 # .cirrus.yml
 
-# Choose Linux platform
+# Choose Ubuntu Linux platform
 platform: linux
+
+# Choose Ubuntu image
+image: ubuntu
 
 # Allocate 16 CPUs
 cpu: 16
 
 # Define your build tasks
 tasks:
-  - name: Run tests
+  - name: Install sudo
     command: |
-      # Add your commands to run tests here
+      apt-get update
+      apt-get install sudo -y
+
