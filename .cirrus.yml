@@ -1,9 +1,13 @@
-task:
-  name: "Setting Up, Syncing, Building and Uploading..."
-  timeout_in: 240m  
-  persistent_worker:
-  isolation:
-    container:
-      image: ubuntu:20.04
-      cpu: 24
-      memory: 128G
+# .cirrus.yml
+
+# Choose Linux platform
+platform: linux
+
+# Allocate 16 CPUs
+cpu: 16
+
+# Define your build tasks
+tasks:
+  - name: Run tests
+    command: |
+      # Add your commands to run tests here
