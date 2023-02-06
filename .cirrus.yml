@@ -1,21 +1,56 @@
-# .cirrus.yml
-
-# Choose Ubuntu Linux platform
-platform: linux
-
-
-
 task:
-  platform: linux
-  name: "Build Task"
+  name: "Setting Up, Syncing, Building and Uploading..."
   timeout_in: 240m  
   container:
-      image: ubantu
-      cpu: 16
+      image: ubuntu:20.04
+      cpu: 8
       memory: 32G
-        
-  script:
-       - echo "Running build with 16 CPUs"
-       - # Add your build commands here
 
+  Build-Env-Setup_script:
+       - export DEBIAN_FRONTEND=noninteractive
+       - apt update
+       - apt install sudo
+       - DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends tzdata
+       - ln -sf /usr/share/zoneinfo/Asia/Kolkata /etc/localtime
+       - apt-get install -y tzdata
+       - dpkg-reconfigure --frontend noninteractive tzdata
+       - sudo apt update -y && sudo apt install git aria2 curl wget rsync zip unzip lzma cpio ccache clang -y
+       - sudo apt install python3 -y
+       - sudo ln -sf /usr/bin/python3 /usr/bin/python
+       - git config --global user.name "Sushrut1101"
+       - git config --global user.email "guptasushrut@gmail.com"
+       
+       - cd ~
+  
+  Storage-Checker_script:
+      - df -h
+      - lsblk
+      - ls -l -a -h
+  
+  Sync_script:
+      - echo "============================"
+      - echo "Syncing The Sources..."
+      - echo "============================"
+      - sudo apt-get update
+      
+      - mkdir -p ~/pixel
+      - cd ~/pixel
+      - git clone https://github.com/rombuilder/treble_build_pe -b thirteen 
+      
 
+      - cd ~
+      
+      - echo "============================"
+      - echo "Syncing Complete!"
+      - echo "============================"
+
+  Build_script:
+      - echo "============================"
+      - echo "Starting the Build..."
+      - echo "============================"
+      - cd ~/pixel
+      - $EXTRA_CMD
+      - export USE_CCACHE=1
+      - export CCACHE_EXEC=/usr/bin/ccache
+      - ccache -M 50G
+      - . treble_build_pe/build.sh thirteen
