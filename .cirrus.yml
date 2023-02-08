@@ -1,12 +1,13 @@
+task:
 compute_engine_instance:
-  image_project: cirrus-images # GCP project.
-  image: ubuntu 20.04 # family or a full image name.
+  
+  image: ubuntu 20.04 
   platform: linux
-  architecture: arm64 # optional. By default, amd64 is assumed.
-  cpu: 9 # optional. Defaults to 2 CPUs.
+  architecture: arm64 
+  cpu: 9 
   memory: 32G # optional. Defaults to 4G.
   disk: 100 # optional. By default, uses the smallest disk size required by the image.
-  nested_virtualization: true # optional. Whether to enable Intel VT-x. Defaults to false.
+  nested_virtualization: true 
 
 
   Build-Env-Setup_script:
