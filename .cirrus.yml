@@ -1,12 +1,13 @@
-task:
-  
-  name: "Setting Up, Syncing, Building and Uploading..."
-  timeout_in: 240m  
-  container:
-      CIRRUS_OS: linux
-      image: ubuntu:20.04
-      cpu: 9
-      memory: 32G
+compute_engine_instance:
+  image_project: cirrus-images # GCP project.
+  image: ubuntu 20.04 # family or a full image name.
+  platform: linux
+  architecture: arm64 # optional. By default, amd64 is assumed.
+  cpu: 9 # optional. Defaults to 2 CPUs.
+  memory: 32G # optional. Defaults to 4G.
+  disk: 100 # optional. By default, uses the smallest disk size required by the image.
+  nested_virtualization: true # optional. Whether to enable Intel VT-x. Defaults to false.
+
 
   Build-Env-Setup_script:
        - export DEBIAN_FRONTEND=noninteractive
