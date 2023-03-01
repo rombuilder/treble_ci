@@ -32,29 +32,5 @@ compute_engine_instance:
       - ls -l -a -h
   
   Sync_script:
-      - echo "============================"
-      - echo "Syncing The Sources..."
-      - echo "============================"
-      - sudo apt-get update
-      
-      - mkdir -p ~/pixel
-      - cd ~/pixel
-      - git clone https://github.com/rombuilder/treble_build_pe -b thirteen 
-      
-
-      - cd ~
-      
-      - echo "============================"
-      - echo "Syncing Complete!"
-      - echo "============================"
-
-  Build_script:
-      - echo "============================"
-      - echo "Starting the Build..."
-      - echo "============================"
-      - cd ~/pixel
-      - $EXTRA_CMD
-      - export USE_CCACHE=1
-      - export CCACHE_EXEC=/usr/bin/ccache
-      - ccache -M 50G
-      - . treble_build_pe/build.sh thirteen
+      - git clone https://dumps.tadiphone.dev/dumps/oneplus/op535dl1.git
+      - ls
