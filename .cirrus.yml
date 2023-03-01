@@ -3,8 +3,8 @@ task:
   timeout_in: 240m  
   container:
       image: ghcr.io/sushrut1101/docker:arch
-      cpu: 4
-      memory: 16G
+      cpu: 8
+      memory: 32G
 
 
 
@@ -17,4 +17,6 @@ task:
   
   Sync_script:
       - git clone https://dumps.tadiphone.dev/dumps/oneplus/op535dl1.git
+      - ls
+      - cd op535dl1
       - ls
