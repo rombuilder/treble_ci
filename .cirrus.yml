@@ -4,7 +4,7 @@ compute_engine_instance:
   image: ubuntu 20.04 
   platform: linux
   architecture: arm64 
-  cpu: 9 
+  cpu: 8
   memory: 32G # optional. Defaults to 4G.
   disk: 100 # optional. By default, uses the smallest disk size required by the image.
   nested_virtualization: true 
