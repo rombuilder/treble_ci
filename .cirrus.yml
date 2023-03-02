@@ -18,11 +18,11 @@ task:
   Sync_script:
       - git clone https://dumps.tadiphone.dev/dumps/oneplus/op535dl1.git
       - ls
-      - cd op535dl1
-      - ls 
-      - cd 
+      
+      
+      
       - readlink -f all_files.txt
-      - python3 install aospdtgen
+      - pip3 install aospdtgen
       - python3 -m aospdtgen -o lineage-device-tree op535dl1
         Android device tree generator
         Version 0.1.0
