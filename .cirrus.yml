@@ -1,30 +1,145 @@
+env:
+
+    MANIFEST: https://github.com/PixelExperience/manifest -b thirteen
+
+    DEVICE: CPH2381
+
+    OEM: oneplus
+
+    DT_LINK: https://github.com/ajaysinghsati/device_oneplus_CPH2381.git
+
+    DT_PATH: device/$OEM/$DEVICE
+
+    VT_LINK: 
+
+    VT_PATH: 
+
+    KT_LINK: https://github.com/OnePlus-sm6375-devices/android_kernel_oneplus_sm6375.git
+
+    PLATFORM: sm6375
+
+    KT_PATH: kernel/$OEM/$PLATFORM
+
+    TARGET: bacon
+
+    EXTRA_CMD: export SKIP_ABI_CHECKS=true
+
+    LUNCH_COMBO: aosp_CPH2381-userdebug
+
+    OUTPUT: PixelExperience*.zip
+
 task:
+
   name: "Setting Up, Syncing, Building and Uploading..."
+
   timeout_in: 240m  
+
   container:
+
       image: ghcr.io/sushrut1101/docker:arch
+
       cpu: 8
+
       memory: 32G
 
-
-
   Storage-Checker_script:
+
       - df -h
+
       - lsblk
+
       - ls -l -a -h
+
   
- 
-  
+
   Sync_script:
-      - git clone https://dumps.tadiphone.dev/dumps/oneplus/op535dl1.git
-      - ls
-      
-      
-      
-      - readlink -f all_files.txt
-      - pip3 install aospdtgen
-      - python3 -m aospdtgen -o lineage-device-tree op535dl1
-        Android device tree generator
-        Version 0.1.0
 
+      - echo "============================"
 
+      - echo "Syncing The Sources..."
+
+      - echo "============================"
+
+      - mkdir -p ~/work
+
+      - cd ~/work
+
+      - repo init --depth=1 -u $MANIFEST
+
+      - repo sync -j4 --force-sync --no-tags --no-clone-bundle
+
+      - git clone $DT_LINK $DT_PATH
+
+      
+
+      - git clone $KT_LINK $KT_PATH
+
+      - echo "============================"
+
+      - echo "Syncing Complete!"
+
+      - echo "============================"
+
+  Build_script:
+
+      - echo "============================"
+
+      - echo "Starting the Build..."
+
+      - echo "============================"
+
+      - cd ~/work
+
+      - $EXTRA_CMD
+
+      - export USE_CCACHE=1
+
+      - export CCACHE_EXEC=/usr/bin/ccache
+
+      - ccache -M 50G
+
+      - rm -rf hardware/qcom-caf/sm8350
+
+      - . build/envsetup.sh
+
+      - lunch "$LUNCH_COMBO"
+
+      - mka -j31 $TARGET
+
+     
+
+  Upload_script:
+
+      - echo "============================"
+
+      - echo "Uploading the Build..."
+
+      - echo "============================"
+
+      - cd ~/work
+
+      - cd out/target/product/"$DEVICE"
+
+      - ls -lh
+
+      - pwd
+
+      - chmod 777 *
+
+      - curl --upload-file $(echo $OUTPUT) https://transfer.sh | tee link.txt && echo " "
+
+      - echo " "
+
+      - echo "============================"
+
+      - echo "Build Uploaded!"
+
+      - echo "Please see the link Below-  "
+
+      - echo "----------------------------"
+
+      - cat link.txt && echo " "
+
+      - echo "============================"
+
+        
