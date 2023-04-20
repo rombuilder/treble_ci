@@ -77,23 +77,23 @@ task:
 
       - echo "============================"
 
-      - cd ~/work
-
-      - $EXTRA_CMD
-
+      - mkdir -p ~/android/pe
       - export USE_CCACHE=1
 
       - export CCACHE_EXEC=/usr/bin/ccache
 
       - ccache -M 50G
+      - cd ~/android/pe
+      - repo init -u https://github.com/PixelExperience/manifest -b thirteen
+      - repo sync -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags
+      - source build/envsetup.sh
 
-      - rm -rf hardware/qcom-caf/sm8350
+      - lunch aosp_merlinx-userdebug
+      - croot
 
-      - . build/envsetup.sh
+      - mka bacon -j$(nproc --all)
 
-      - lunch "$LUNCH_COMBO"
 
-      - mka -j31 $TARGET
 
      
 
