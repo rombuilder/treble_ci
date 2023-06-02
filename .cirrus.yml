@@ -33,8 +33,9 @@ task:
       - echo "Syncing The Sources..."
       - echo "============================"
       - git clone https://gitlab.com/Romdumprx/oneplus/cph2381.git holi
-      - cd holi 
-      - cd dummy-device-tree 
+      - cd holi
+      - ls
+      - cd dummy-device-tree
       - cd oneplus 
       - cd CPH2381
       - ls
