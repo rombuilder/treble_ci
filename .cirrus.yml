@@ -45,7 +45,7 @@ task:
       - .setup-makefiles.sh
       - ls
       - chmod u+x extract-files.sh
-      - .extract-files.sh
+      - .extract-files.sh ~/holi
 
       - ls
       - echo "============================"
