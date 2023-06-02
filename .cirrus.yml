@@ -1,134 +1,147 @@
 env:
 
-    MANIFEST: https://github.com/PixelExperience/manifest -b thirteen
+  # Telegram
 
-    DEVICE: CPH2381
+  TG_CHAT: "@Romdumprx"
 
-    OEM: oneplus
+  TG_TOKEN: ENCRYPTED[d1a9423df240b4603cb01c74226ce778d706ea74b0e392a648427279d2b1769c89ff6cb40d8d4010ac825ae2139258e4]
 
-    DT_LINK: https://github.com/ajaysinghsati/device_oneplus_CPH2381.git
+  
 
-    DT_PATH: device/$OEM/$DEVICE
+  # Gitlab
 
-    VT_LINK: 
+  PUSH_TO_GITLAB: true
 
-    VT_PATH: 
+  GITLAB_GROUP: RomdumprX
 
-    KT_LINK: https://github.com/OnePlus-sm6375-devices/android_kernel_oneplus_sm6375.git
+  GITLAB_TOKEN: ENCRYPTED[45935788bcd4fb135bab05e492e362f1e0e54c34d671564130d1a23cff80b58e31a77b62b04d4f55e6f0a5ceaed8e1ae]
 
-    PLATFORM: sm6375
+  GITLAB_INSTANCE: gitlab.com
 
-    KT_PATH: kernel/$OEM/$PLATFORM
+  
 
-    TARGET: bacon
+  # Private SSH Key
 
-    EXTRA_CMD: export SKIP_ABI_CHECKS=true
-
-    LUNCH_COMBO: aosp_CPH2381-userdebug
-
-    OUTPUT: PixelExperience*.zip
+  PRIV_SSH_KEY: ENCRYPTED[ee35774d13340e144514e0231eb7b155ae53ec978a75d55e4f8f3cb832a0a8845e5b39a7c98a9f677ad2a2778f0d38f2]
 
 task:
 
-  name: "Setting Up, Syncing, Building and Uploading..."
+  name: "Firmware Dump by DumprX"
 
-  timeout_in: 240m  
+  only_if: $CIRRUS_REPO_OWNER == 'RomdumprX'
+
+  
+
+  auto_cancellation: $CIRRUS_BRANCH == 'autocancel'
+
+  timeout_in: 120m
 
   container:
 
       image: ghcr.io/sushrut1101/docker:arch
 
-      cpu: 8
+      privileged: true
 
-      memory: 32G
+      cpu: 4
 
-  Storage-Checker_script:
+      memory: 16G
 
-      - df -h
+  Clone_script:
 
-      - lsblk
-
-      - ls -l -a -h
-
-  
-
-  Sync_script:
+     
 
       - echo "============================"
 
       - echo "Syncing The Sources..."
 
       - echo "============================"
+
+      - git clone https://gitlab.com/Romdumprx/oneplus/cph2381.git holi
+
+      - cd holi 
+
+      - cd dummy-device-tree 
+
+      - cd oneplus 
+
+      - cd CPH2381
+
+      - ls
+
+      - echo "============================"
+
+      - echo "Syncing Complete!"
+
+      - echo "============================"
+
+  Setup_script:
+
+      - git config --global user.name "sungsong85"
+
+      - git config --global user.email "sungsong85@gmail.com"
+
       
-      - cd ~/
-      - git clone https://github.com/akhilnarang/scripts
-      - cd scripts
-      - ./setup/android_build_env.sh
 
+  
+
+  Set-SSH-Keys_script:
+
+      - ssh-keygen -t rsa -f ~/.ssh/id_rsa -N ''
+
+      - ssh-keyscan -t rsa gitlab.com >> ~/.ssh/known_hosts
+
+      - ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
 
       
-      - echo "============================"
 
-  Build_script:
+      
 
-      - echo "============================"
+      - chmod 600 ~/.ssh/id_rsa
 
-      - echo "Starting the Build..."
+      - cd ~/.ssh 
 
-      - echo "============================"
+      - cat id_rsa.pub
 
-      - mkdir -p ~/android/pe
-      - export USE_CCACHE=1
+      
 
-      - export CCACHE_EXEC=/usr/bin/ccache
+      
 
-      - ccache -M 50G
-      - cd ~/android/pe
-      - repo init -u https://github.com/PixelExperience/manifest -b thirteen
-      - repo sync -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags
-      - source build/envsetup.sh
+  Push-to-gitlab_script:
 
-      - lunch aosp_merlinx-userdebug
-      - croot
+      
 
-      - mka bacon -j$(nproc --all)
+      - sleep 300
 
+      - ls
 
+      - cd holi 
 
-     
+      - cd dummy-device-tree 
 
-  Upload_script:
+      - cd oneplus 
 
-      - echo "============================"
+      - cd CPH2381
 
-      - echo "Uploading the Build..."
+      - git init 
 
-      - echo "============================"
+      - git add .
 
-      - cd ~/work
+      - git commit -m "first commit"
 
-      - cd out/target/product/"$DEVICE"
+      - git branch -M main 
 
-      - ls -lh
+      - git remote add origin git@gitlab.com:Romdumprx/cph2381/dummy-device-tree.git
 
-      - pwd
+      - git push -u origin main
 
-      - chmod 777 *
+      
 
-      - curl --upload-file $(echo $OUTPUT) https://transfer.sh | tee link.txt && echo " "
+    
 
-      - echo " "
+   
 
-      - echo "============================"
+      
 
-      - echo "Build Uploaded!"
+       
 
-      - echo "Please see the link Below-  "
-
-      - echo "----------------------------"
-
-      - cat link.txt && echo " "
-
-      - echo "============================"
-
-        
+  
