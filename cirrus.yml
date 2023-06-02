@@ -32,12 +32,15 @@ task:
       - echo "============================"
       - echo "Syncing The Sources..."
       - echo "============================"
-      - git clone https://gitlab.com/Romdumprx/oneplus/cph2381.git holi
-      - cd holi
+      - git clone https://gitlab.com/Romdumprx/oneplus/cph2381.git ~/holi
+      - git clone https://gitlab.com/Romdumprx/cph2381/dummy-device-tree.git device/oneplus/CPH2381
+      - git clone https://github.com/LineageOS/android_tools_extract-utils.git tools/extract-utils
+      - git clone https://github.com/LineageOS/android_prebuilts_extract-tools prebuilts/extract-tools
       - ls
-      - cd dummy-device-tree
+      - cd device
       - cd oneplus 
       - cd CPH2381
+      - 
       - ls
       - echo "============================"
       - echo "Syncing Complete!"
