@@ -1,140 +1,88 @@
 env:
-
   # Telegram
-
   TG_CHAT: "@Romdumprx"
-
   TG_TOKEN: ENCRYPTED[d1a9423df240b4603cb01c74226ce778d706ea74b0e392a648427279d2b1769c89ff6cb40d8d4010ac825ae2139258e4]
-
   
-
   # Gitlab
-
   PUSH_TO_GITLAB: true
-
   GITLAB_GROUP: RomdumprX
 
   GITLAB_TOKEN: ENCRYPTED[45935788bcd4fb135bab05e492e362f1e0e54c34d671564130d1a23cff80b58e31a77b62b04d4f55e6f0a5ceaed8e1ae]
-
   GITLAB_INSTANCE: gitlab.com
-
   
-
   # Private SSH Key
-
   PRIV_SSH_KEY: ENCRYPTED[ee35774d13340e144514e0231eb7b155ae53ec978a75d55e4f8f3cb832a0a8845e5b39a7c98a9f677ad2a2778f0d38f2]
 
 task:
-
   name: "Firmware Dump by DumprX"
-
-  only_if: $CIRRUS_REPO_OWNER == 'RomdumprX'
-
   
-
-  auto_cancellation: $CIRRUS_BRANCH == 'autocancel'
-
+  
+ 
   timeout_in: 120m
-
   container:
-
       image: ghcr.io/sushrut1101/docker:arch
 
       privileged: true
-
       cpu: 4
-
       memory: 16G
 
+
   Clone_script:
-
      
-
       - echo "============================"
-
       - echo "Syncing The Sources..."
-
       - echo "============================"
-
       - git clone https://gitlab.com/Romdumprx/oneplus/cph2381.git holi
-
       - cd holi 
-
       - cd dummy-device-tree 
-
       - cd oneplus 
-
       - cd CPH2381
-
       - ls
-
       - echo "============================"
-
       - echo "Syncing Complete!"
-
       - echo "============================"
 
   Setup_script:
-
       - git config --global user.name "sungsong85"
-
       - git config --global user.email "sungsong85@gmail.com"
-
       
-
   
-
   Set-SSH-Keys_script:
-
       - ssh-keygen -t rsa -f ~/.ssh/id_rsa -N ''
-
       - ssh-keyscan -t rsa gitlab.com >> ~/.ssh/known_hosts
-
       - ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
-
       
-
       
-
       - chmod 600 ~/.ssh/id_rsa
-
       - cd ~/.ssh 
-
       - cat id_rsa.pub
-
       
-
       
-
   Push-to-gitlab_script:
 
       
-
       - sleep 300
-
       - ls
-
       - cd holi 
-
       - cd dummy-device-tree 
-
       - cd oneplus 
-
       - cd CPH2381
-
       - git init 
-
       - git add .
-
       - git commit -m "first commit"
-
       - git branch -M main 
-
       - git remote add origin git@gitlab.com:Romdumprx/cph2381/dummy-device-tree.git
-
       - git push -u origin main
+      
+    
+   
+      
+       
+
+  
 
       
+
 
     
 
