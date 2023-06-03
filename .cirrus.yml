@@ -1,4 +1,4 @@
-env:
+ env:
   # Telegram
   TG_CHAT: "@Romdumprx"
   TG_TOKEN: ENCRYPTED[d1a9423df240b4603cb01c74226ce778d706ea74b0e392a648427279d2b1769c89ff6cb40d8d4010ac825ae2139258e4]
@@ -73,8 +73,8 @@ task:
       
       - sleep 300
       - ls
-      - cd
-    
+      - cd vendor
+      - ls
     
     
       - git init 
