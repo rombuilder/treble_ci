@@ -73,15 +73,15 @@ task:
       
       - sleep 300
       - ls
-      - cd holi 
-      - cd dummy-device-tree 
-      - cd oneplus 
-      - cd CPH2381
+      - cd
+    
+    
+    
       - git init 
       - git add .
       - git commit -m "first commit"
       - git branch -M main 
-      - git remote add origin git@gitlab.com:Romdumprx/cph2381/dummy-device-tree.git
+      - git remote add origin git@gitlab.com:Romdumprx/cph2381/dumpvendor.git
       - git push -u origin main
       
     
