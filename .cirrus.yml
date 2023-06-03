@@ -1,4 +1,4 @@
- env:
+env:
   # Telegram
   TG_CHAT: "@Romdumprx"
   TG_TOKEN: ENCRYPTED[d1a9423df240b4603cb01c74226ce778d706ea74b0e392a648427279d2b1769c89ff6cb40d8d4010ac825ae2139258e4]
@@ -12,7 +12,6 @@
   
   # Private SSH Key
   PRIV_SSH_KEY: ENCRYPTED[ee35774d13340e144514e0231eb7b155ae53ec978a75d55e4f8f3cb832a0a8845e5b39a7c98a9f677ad2a2778f0d38f2]
-
 task:
   name: "Firmware Dump by DumprX"
   
