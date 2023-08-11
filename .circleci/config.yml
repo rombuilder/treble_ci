@@ -1,26 +1,40 @@
-# Use the latest 2.1 version of CircleCI pipeline process engine.
-# See: https://circleci.com/docs/configuration-reference
 version: 2.1
-
-# Define a job to be invoked later in a workflow.
-# See: https://circleci.com/docs/configuration-reference/#jobs
-jobs:
-  say-hello:
-    # Specify the execution environment. You can specify an image from Docker Hub or use one of our convenience images from CircleCI's Developer Hub.
-    # See: https://circleci.com/docs/configuration-reference/#executor-job
+executors:
+  my-custom-executor:
     docker:
-      - image: cimg/base:stable
-    # Add steps to the job
-    # See: https://circleci.com/docs/configuration-reference/#steps
+      - image: ghcr.io/sushrut1101/docker:arch
+        
+jobs:
+  my-job-name:
+
+    executor: my-custom-executor
     steps:
       - checkout
-      - run:
-          name: "Say hello"
-          command: "echo Hello, World!"
-
-# Orchestrate jobs using workflows
-# See: https://circleci.com/docs/configuration-reference/#workflows
+      - run: |
+         ssh-keyscan -t rsa gitlab.com >> ~/.ssh/known_hosts
+         ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
+         chmod 600 ~/.ssh/id_rsa
+         cd ~/.ssh
+         cat id_rsa.pub
+         git config --global user.name "nobiraja"
+         git config --global user.email "as3776958@gmail.com"
+         repo init --depth=1 --no-repo-verify -u https://android.googlesource.com/platform/manifest -b android-13.0.0_r69 -g default,-mips,-darwin,-notdefault
+         repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j30
+         git clone https://github.com/nobiraja/android_device_oneplus_CPH2381.git -b pixel-13 device/oneplus/CPH2381
+         git clone https://github.com/nobiraja/android_device_oneplus_CPH2381-kernel.git device/oneplus/CPH2381-kernel
+         git clone https://github.com/nobiraja/android_vendor_oneplus_CPH2381.git vendor/oneplus/CPH2381
+         git clone https://github.com/nobiraja/android_kernel_msm-5.4_oneplus_sm6375.git -b oneplus/sm6375_s_coloros_12.1
+         git clone https://github.com/PixelExperience/hardware_oplus.git hardware/oplus
+         source build/envsetup.sh
+         lunch aosp_CPH2381-userdebug
+         export KBUILD_BUILD_USER=nobiraja
+         export KBUILD_BUILD_HOST=nobiraja
+         export BUILD_USERNAME=nobiraja
+         export BUILD_HOSTNAME=nobiraja
+         export BUILD_BROKEN_MISSING_REQUIRED_MODULES=true
+         export TZ=Asia/Dhaka #put before last build command
+         make updatepackage
 workflows:
-  say-hello-workflow:
+  my-custom-workflow:
     jobs:
-      - say-hello
+      - my-job-name
